@@ -15,7 +15,10 @@ import androidx.compose.material3.LocalMinimumInteractiveComponentEnforcement
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.modifier.modifierLocalOf
@@ -23,7 +26,7 @@ import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.caraoucoroa.ui.theme.CaraOuCoroaTheme
-import kotlin.random.Random
+import java.util.Random
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,7 +65,7 @@ fun GreetingPreview() {
 
 @Composable
 fun CaraOuCoroa(modifier: Modifier = Modifier) {
-        var resultado by remember { mutableStateOf(value = "") }
+    var resultado by remember { mutableStateOf(value = "") }
     Column(
         modifier = modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
@@ -71,13 +74,16 @@ fun CaraOuCoroa(modifier: Modifier = Modifier) {
         Text(text = "Jogo cara ou coroa")
         Spacer(Modifier.height(height = 16.dp))
         Button(onClick = {
-            val resultado = Random().nextBoolean()
-        }) {Text(text= "jogar")
+            resultado = if (Random().nextBoolean()) "Cara" else "Coroa"
+        }) {
+            Text(text = "jogar")
+        }
+        if(resultado.isNotEmpty()){
+            Spacer(Modifier.height (height = 24.dp))
+            Text(text = resultado)
+        }
+
     }
 
-}
-Text(
-text = "Cara ou coroa"
-)
 
 }
