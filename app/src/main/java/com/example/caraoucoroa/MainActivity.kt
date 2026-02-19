@@ -71,15 +71,24 @@ fun CaraOuCoroa(modifier: Modifier = Modifier) {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(text = "Jogo cara ou coroa")
+        Text(text = "Jogo de Dados")
         Spacer(Modifier.height(height = 16.dp))
         Button(onClick = {
-            resultado = if (Random().nextBoolean()) "Cara" else "Coroa"
+            val numero = Random().nextInt(6) + 1
+            resultado = when (numero) {
+                1 -> "🎲 1️⃣"
+                2 -> "🎲 2️⃣"
+                3 -> "🎲 3️⃣"
+                4 -> "🎲 4️⃣"
+                5 -> "🎲 5️⃣"
+                6 -> "🎲 6️⃣"
+                else -> ""
+            }
         }) {
             Text(text = "jogar")
         }
-        if(resultado.isNotEmpty()){
-            Spacer(Modifier.height (height = 24.dp))
+        if (resultado.isNotEmpty()) {
+            Spacer(Modifier.height(height = 24.dp))
             Text(text = resultado)
         }
 
